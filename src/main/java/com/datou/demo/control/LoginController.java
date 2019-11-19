@@ -4,6 +4,7 @@ import com.datou.demo.model.LoginResultModel;
 import com.datou.demo.service.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,10 +22,11 @@ public class LoginController {
     @Resource
     LoginService loginService;
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
-    public Object login(@RequestParam(name = "name")String name, @RequestParam(name="password") String password) {
+    public Object login(@RequestParam(name = "name",required = false)String name, @RequestParam(name="password",required = false) String password) {
         LoginResultModel loginResultModel = loginService.login(name, password);
+
         return loginResultModel;
     }
 
